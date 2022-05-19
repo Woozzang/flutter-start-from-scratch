@@ -9,18 +9,32 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.teal,
-        body: SafeArea(
-          child: Container(
-            height: 100,
-            width: 100,
-            margin: EdgeInsets.only(left: 30.0),
-            padding: EdgeInsets.all(20),
-            color: Colors.white,
-            child: Text('Hello'),
-          ),
-        ),
-      ),
+          backgroundColor: Colors.teal,
+          body: SafeArea(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  height: 100,
+                  color: Colors.white,
+                  child: Text('Hello'),
+                ),
+                SizedBox(
+                  width: 30,
+                ),
+                Container(
+                  height: 100.0,
+                  color: Colors.blue,
+                  child: Text('Hello'),
+                ),
+                Container(
+                  height: 100.0,
+                  color: Colors.red,
+                  child: Text('Hello'),
+                ),
+              ],
+            ),
+          )),
     );
   }
 }
