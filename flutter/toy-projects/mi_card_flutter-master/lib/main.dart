@@ -36,51 +36,42 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   letterSpacing: 2.5),
             ),
-            Container(
-              padding: EdgeInsets.all(10),
-              color: Colors.white,
-              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-              child: Row(
-                children: [
-                  Icon(Icons.phone, color: Colors.teal),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    '+82 10 5131 9225',
-                    style: TextStyle(
-                      color: Colors.teal.shade900,
-                      fontFamily: 'Source Sans Pro',
-                      fontSize: 20.0,
-                    ),
-                  )
-                ],
+            SizedBox(
+              width: 180,
+              child: Divider(
+                color: Colors.teal.shade100,
               ),
             ),
-            Container(
+            Card(
               color: Colors.white,
               margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-              padding: EdgeInsets.all(10),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.email,
-                    color: Colors.teal,
+              child: ListTile(
+                leading: Icon(Icons.phone, color: Colors.teal),
+                title: Text(
+                  '+82 10 5131 9925',
+                  style: TextStyle(
+                    color: Colors.teal.shade900,
+                    fontFamily: 'Source Sans Pro',
+                    fontSize: 20.0,
                   ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    'woozzaang@gmail.com',
-                    style: TextStyle(
-                      color: Colors.teal.shade900,
-                      fontFamily: 'Source Sans Pro',
-                      fontSize: 20.0,
-                    ),
-                  ),
-                ],
+                ),
               ),
-            )
+            ),
+            Card(
+              color: Colors.white,
+              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+              child: ListTile(
+                leading: Icon(Icons.email, color: Colors.teal),
+                title: Text(
+                  'woozzaang@gmail.com',
+                  style: TextStyle(
+                    color: Colors.teal.shade900,
+                    fontFamily: 'Source Sans Pro',
+                    fontSize: 20.0,
+                  ),
+                ),
+              ),
+            ),
           ],
         )),
       ),
