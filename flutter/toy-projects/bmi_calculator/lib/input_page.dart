@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
-
-const bottomContainerHeight = 80.0;
-const activeCardColor = Color(0xFF1D1E33);
-const inactiveCardColor = Color(0xFF111328);
-const bottomContainerColor = Color(0xFFEB1555);
+import 'constants.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -14,6 +10,9 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender selectedGender = Gender.male;
+  int height = 180;
+  int weight = 75;
+  int age = 19;
 
   // 1 = male.
   // 2 = female.
@@ -38,8 +37,8 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ReusableCard(
                     selectedGender == Gender.male
-                        ? activeCardColor
-                        : inactiveCardColor,
+                        ? kActiveCardColor
+                        : kInactiveCardColor,
                     IconContent(FontAwesomeIcons.mars, 'MALE'),
                     () {
                       setState(() {
@@ -51,8 +50,8 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ReusableCard(
                     selectedGender == Gender.female
-                        ? activeCardColor
-                        : inactiveCardColor,
+                        ? kActiveCardColor
+                        : kInactiveCardColor,
                     IconContent(FontAwesomeIcons.venus, 'Female'),
                     () {
                       setState(() {
@@ -64,20 +63,146 @@ class _InputPageState extends State<InputPage> {
               ],
             )),
             Expanded(
-              child: ReusableCard(activeCardColor, Container(), () {}),
+              child: ReusableCard(
+                  kActiveCardColor,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'HEIGHT',
+                        style: kLabelTextStyle,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          Text('$height',
+                              style: TextStyle(
+                                fontSize: 50,
+                                fontWeight: FontWeight.w900,
+                              )),
+                          Text('cm'),
+                        ],
+                      ),
+                      SliderTheme(
+                        data: SliderTheme.of(context).copyWith(
+                          activeTrackColor: Colors.white,
+                          inactiveTrackColor: Color(0xFF8D8E98),
+                          thumbColor: Color(0xFFEB1555),
+                          thumbShape:
+                              RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                          // overlayShape:
+                          //     RoundSliderThumbShape(enabledThumbRadius: 20.0),
+                        ),
+                        child: Slider(
+                            value: height.toDouble(),
+                            min: 120.0,
+                            max: 220.0,
+                            onChanged: (value) {
+                              setState(() {
+                                height = value.round();
+                              });
+                            }),
+                      ),
+                    ],
+                  ),
+                  () {}),
             ),
             Expanded(
                 child: Row(
               children: [
-                ReusableCard(activeCardColor, Container(), () {}),
-                ReusableCard(activeCardColor, Container(), () {}),
+                Expanded(
+                  child: ReusableCard(
+                    kActiveCardColor,
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'WEIGHT',
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          '$weight',
+                          style: TextStyle(
+                            fontSize: 50,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(FontAwesomeIcons.minus, () {
+                              setState(() {
+                                if (weight > 0) {
+                                  weight--;
+                                }
+                              });
+                            }),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            RoundIconButton(FontAwesomeIcons.plus, () {
+                              setState(() {
+                                weight++;
+                              });
+                            }),
+                          ],
+                        ),
+                      ],
+                    ),
+                    null,
+                  ),
+                ),
+                Expanded(
+                  child: ReusableCard(
+                    kActiveCardColor,
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'AGE',
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          '$age',
+                          style: TextStyle(
+                            fontSize: 50,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(FontAwesomeIcons.minus, () {
+                              setState(() {
+                                if (age > 0) {
+                                  age--;
+                                }
+                              });
+                            }),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            RoundIconButton(FontAwesomeIcons.plus, () {
+                              setState(() {
+                                age++;
+                              });
+                            }),
+                          ],
+                        ),
+                      ],
+                    ),
+                    null,
+                  ),
+                )
               ],
             )),
             Container(
-              color: bottomContainerColor,
+              color: kBottomContainerColor,
               margin: EdgeInsets.only(top: 10.0),
               width: double.infinity,
-              height: bottomContainerHeight,
+              height: kBottomContainerHeight,
             ),
           ],
         ),
@@ -120,4 +245,30 @@ class ReusableCard extends StatelessWidget {
 enum Gender {
   male,
   female;
+}
+
+class RoundIconButton extends StatelessWidget {
+  RoundIconButton(this.iconData, this.onPressedHandler);
+
+  final IconData iconData;
+
+  void Function() onPressedHandler;
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      child: Icon(
+        iconData,
+        color: Colors.white,
+      ),
+      elevation: 6.0,
+      onPressed: onPressedHandler,
+      constraints: BoxConstraints.tightFor(
+        width: 56.0,
+        height: 56.0,
+      ),
+      shape: CircleBorder(),
+      fillColor: Color(0xFF4C4F5E),
+    );
+  }
 }
