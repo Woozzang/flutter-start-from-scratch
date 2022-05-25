@@ -1,7 +1,12 @@
+import 'package:bmi_calculator/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
 import 'constants.dart';
+import 'results_page.dart';
+import 'reusable_card.dart';
+import 'bottom_button.dart';
+import 'round_icon_button.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -198,12 +203,11 @@ class _InputPageState extends State<InputPage> {
                 )
               ],
             )),
-            Container(
-              color: kBottomContainerColor,
-              margin: EdgeInsets.only(top: 10.0),
-              width: double.infinity,
-              height: kBottomContainerHeight,
-            ),
+            BottomButton('CALCULATE', () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return ResultsPage();
+              }));
+            }),
           ],
         ),
       ),
@@ -211,64 +215,7 @@ class _InputPageState extends State<InputPage> {
   }
 }
 
-class ReusableCard extends StatelessWidget {
-  final Color color;
-  final Widget? cardChild;
-  void Function()? onTap;
-
-  ReusableCard(this.color, this.cardChild, this.onTap);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        child: cardChild,
-        margin: EdgeInsets.all(15),
-        decoration: BoxDecoration(
-          color: this.color,
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-      ),
-    );
-  }
-}
-
-// Container(
-//         margin: EdgeInsets.all(15),
-//         decoration: BoxDecoration(
-//           color: Color(0xFF1D1E33),
-//           borderRadius: BorderRadius.circular(10.0),
-//         ),
-//       ),
-
 enum Gender {
   male,
   female;
-}
-
-class RoundIconButton extends StatelessWidget {
-  RoundIconButton(this.iconData, this.onPressedHandler);
-
-  final IconData iconData;
-
-  void Function() onPressedHandler;
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      child: Icon(
-        iconData,
-        color: Colors.white,
-      ),
-      elevation: 6.0,
-      onPressed: onPressedHandler,
-      constraints: BoxConstraints.tightFor(
-        width: 56.0,
-        height: 56.0,
-      ),
-      shape: CircleBorder(),
-      fillColor: Color(0xFF4C4F5E),
-    );
-  }
 }
