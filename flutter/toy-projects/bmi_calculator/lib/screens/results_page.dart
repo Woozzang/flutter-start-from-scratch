@@ -1,10 +1,14 @@
 import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
-import 'input_page.dart';
-import 'reusable_card.dart';
-import 'bottom_button.dart';
+import 'package:bmi_calculator/components/bottom_button.dart';
+import 'package:bmi_calculator/components/reusable_card.dart';
 
 class ResultsPage extends StatelessWidget {
+  ResultsPage(this.bmiResultText, this.resultText, this.interpretationText);
+  final String bmiResultText;
+  final String resultText;
+  final String interpretationText;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +21,8 @@ class ResultsPage extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-                margin: EdgeInsets.fromLTRB(10, 25, 10, 25),
+                padding: EdgeInsets.all(15),
+                alignment: Alignment.bottomLeft,
                 child: Text(
                   'Your Result',
                   style: kTitleTextStyle,
@@ -26,7 +31,7 @@ class ResultsPage extends StatelessWidget {
           Expanded(
               flex: 5,
               child: Container(
-                margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                margin: EdgeInsets.all(15),
                 color: kActiveCardColor,
                 child: ReusableCard(
                     kActiveCardColor,
@@ -35,15 +40,15 @@ class ResultsPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          'Normal',
+                          resultText.toUpperCase(),
                           style: kResultTextStyle,
                         ),
                         Text(
-                          '18.3',
+                          bmiResultText,
                           style: kBMITextStyle,
                         ),
                         Text(
-                          'Your BMI result is quite low, you should eat more!',
+                          interpretationText,
                           textAlign: TextAlign.center,
                           style: kBodyTextStyle,
                         ),
@@ -51,7 +56,9 @@ class ResultsPage extends StatelessWidget {
                     ),
                     (() {})),
               )),
-          BottomButton('RE-CALCULATE', () {}),
+          BottomButton('RE-CALCULATE', () {
+            Navigator.pop(context);
+          }),
         ],
       ),
     );

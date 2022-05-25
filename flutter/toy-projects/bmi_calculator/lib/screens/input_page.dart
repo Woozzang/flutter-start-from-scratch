@@ -1,12 +1,13 @@
-import 'package:bmi_calculator/results_page.dart';
+import 'package:bmi_calculator/screens/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'icon_content.dart';
-import 'constants.dart';
+import '../constants.dart';
 import 'results_page.dart';
-import 'reusable_card.dart';
-import 'bottom_button.dart';
-import 'round_icon_button.dart';
+import 'package:bmi_calculator/components/bottom_button.dart';
+import 'package:bmi_calculator/components/icon_content.dart';
+import 'package:bmi_calculator/components/round_icon_button.dart';
+import 'package:bmi_calculator/components/reusable_card.dart';
+import 'caculator_brain.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -124,7 +125,7 @@ class _InputPageState extends State<InputPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'WEIGHT',
+                          'WEIGHT'.toUpperCase(),
                           style: kLabelTextStyle,
                         ),
                         Text(
@@ -205,7 +206,13 @@ class _InputPageState extends State<InputPage> {
             )),
             BottomButton('CALCULATE', () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return ResultsPage();
+                final brain = CaculatorBrain(height, weight);
+
+                final bmiResultText = brain.caculateBMI();
+                final result = brain.getResult();
+                final interpretation = brain.getInterpretation();
+
+                return ResultsPage(bmiResultText, result, interpretation);
               }));
             }),
           ],
