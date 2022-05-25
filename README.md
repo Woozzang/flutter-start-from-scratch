@@ -4,7 +4,7 @@
 ## Education
 - [안젤라유 2021](https://www.udemy.com/course/flutter-bootcamp-with-dart/)
 ## Toy Projects
-- [BMI Calculator]()
+- [BMI Calculator](https://github.com/Woozzang/flutter-start-from-scratch/tree/main/flutter/toy-projects/bmi_calculator)
 
 
 # Dart
