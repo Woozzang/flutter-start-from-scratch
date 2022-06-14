@@ -8,6 +8,7 @@
 ## Toy Projects
 - [BMI Calculator ⚖️](https://github.com/Woozzang/flutter-start-from-scratch/tree/main/flutter/toy-projects/bmi_calculator)
 <img src="https://user-images.githubusercontent.com/70905219/170302310-39646591-7cb7-4ef5-9894-20358f2be4b6.png" width= "20%">
+
 - [Video Player](https://marsh-flavor-e1c.notion.site/cf05e2facd524acab75bc7683f405537)
 
 ## 읽을거리
